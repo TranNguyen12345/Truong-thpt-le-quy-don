@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trường THPT Lê Quý Đôn - Di Tích Lịch Sử Kiến Trúc Sài Gòn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+        .map-box { height: 300px; width: 100%; }
+    </style>
+</head>
+<body class="bg-[#FFFBF0] text-[#1A202C] min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-[#9B2C2C] text-white shadow-md py-4 px-6">
+        <div class="max-w-4xl mx-auto flex items-center space-x-3">
+            <i class="fa-solid fa-school text-2xl text-[#D69E2E]"></i>
+            <h1 class="text-xl font-bold">Trường THPT Lê Quý Đôn</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-1 space-y-6 w-full">
+        <!-- Image Banner -->
+        <div class="relative h-72 md:h-96 rounded-2xl overflow-hidden shadow-lg">
+            <img src="le-quy-don.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent flex items-end p-6">
+                <div>
+                    <span class="px-3 py-1 bg-[#9B2C2C] text-white text-xs font-semibold rounded-full uppercase">Di tích Kiến trúc - Giáo dục</span>
+                    <h1 class="text-2xl md:text-4xl font-bold text-white mt-2">Trường THPT Lê Quý Đôn</h1>
+                    <p class="text-gray-200 text-sm mt-1"><i class="fa-solid fa-location-dot text-[#D69E2E] mr-2"></i>204 Nguyễn Thị Minh Khai, Phường Võ Thị Sáu, Quận 3</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Section -->
+        <div class="bg-[#9B2C2C] text-white p-5 rounded-xl shadow flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-headphones text-2xl text-[#D69E2E]"></i>
+                <div><h4 class="font-bold">Thuyết Minh Audio</h4><p class="text-xs text-red-200">Nghe giới thiệu về lịch sử và kiến trúc ngôi trường</p></div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="speakText('Trường trung học phổ thông Lê Quý Đôn được khởi công xây dựng năm 1874 với tên gọi ban đầu là trường Chasseloup-Laubat. Công trình nổi bật với bố cục không gian hình chữ U khép kín, kỹ thuật chế tác kết hợp Đông Tây độc đáo, đường nét tân cổ điển nhã nhặn cùng các giải pháp nhiệt đới hóa đặc trưng giúp không gian luôn mát mẻ qua hơn một thế kỷ.')" class="px-4 py-2 bg-[#D69E2E] text-[#1A202C] font-bold rounded-lg text-sm hover:bg-yellow-400 transition"><i class="fa-solid fa-play mr-1"></i> Phát</button>
+                <button onclick="stopSpeech()" class="px-4 py-2 bg-white/20 rounded-lg text-sm hover:bg-white/30 transition"><i class="fa-solid fa-stop mr-1"></i> Dừng</button>
+            </div>
+        </div>
+
+        <!-- Details -->
+        <div class="bg-white p-6 rounded-xl shadow-sm space-y-6">
+            <h3 class="font-bold text-xl text-[#9B2C2C] border-b pb-2">Giới Thiệu Chi Tiết Kiến Trúc</h3>
+            
+            <p class="text-gray-700 leading-relaxed">
+                Được thành lập năm 1874 với tên gọi ban đầu là <strong>Lycée Chasseloup-Laubat</strong>, trường là ngôi trường trung học lâu đời nhất Sài Gòn. Nơi đây là một kiệt tác kiến trúc kết hợp hài hòa giữa kỹ thuật phương Tây và văn hóa bản địa.
+            </p>
+
+            <!-- Section 1 -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-gray-900 text-lg flex items-center">
+                    <i class="fa-solid fa-shapes text-[#9B2C2C] mr-2"></i> 1. Bố cục không gian hình chữ U và triết lý quy hoạch Đông - Tây
+                </h4>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2 leading-relaxed">
+                    <li><strong>Bố cục chữ U khép kín:</strong> Công trình gồm các dãy nhà 2 tầng chạy dọc tạo thành khối hình chữ U ôm trọn lấy khoảng sân rộng ở chính giữa. Cấu trúc này vừa thừa hưởng tư duy quy hoạch không gian mở (Courtyard) của phương Tây, vừa gợi nhớ đến kiểu nhà "nhị đại", "tam đại" truyền thống của người Đông Á.</li>
+                </ul>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-gray-900 text-lg flex items-center">
+                    <i class="fa-solid fa-layer-group text-[#9B2C2C] mr-2"></i> 2. Kỹ thuật chế tác kết hợp Đông - Tây
+                </h4>
+                <p class="text-gray-700 leading-relaxed">
+                    Sự độc đáo của công trình còn nằm ở sự kết hợp hoàn hảo giữa vật liệu hiện đại nhập khẩu từ Pháp và vật liệu truyền thống Việt Nam:
+                </p>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2 leading-relaxed">
+                    <li><strong>Tường gạch và vôi vữa truyền thống:</strong> Tường nhà được xây cực kỳ dày (từ 30cm – 40cm) bằng gạch đất nung kết hợp vôi vữa. Độ dày này tạo nên một lớp cách nhiệt tự nhiên, giữ cho không khí trong lớp học luôn mát mẻ vào ban ngày và ấm áp vào mùa mưa.</li>
+                    <li><strong>Móng kè đá đẽo kiên cố:</strong> Chân tường và phần móng được kè bằng các khối đá đẽo thô chắc chắn, giúp chống chọi với độ ẩm cao và tình trạng triều cường, ngập nước đặc trưng của vùng đất Nam Bộ.</li>
+                    <li><strong>Ngói đất nung và khung gỗ chịu lực:</strong> Mái nhà sử dụng hệ vì kèo bằng gỗ sắt chịu lực kết hợp lợp ngói âm dương / ngói Tây đỏ nung. Sự pha trộn này giúp mái giữ được nét thanh thoát của kiến trúc Pháp nhưng vẫn mang tâm hồn gần gũi của mái nhà Việt.</li>
+                </ul>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-gray-900 text-lg flex items-center">
+                    <i class="fa-solid fa-landmark text-[#9B2C2C] mr-2"></i> 3. Đường nét Tân cổ điển nhã nhặn và Chuẩn mực Sư phạm
+                </h4>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2 leading-relaxed">
+                    <li><strong>Hệ vòm cửa lá sách:</strong> Những vòm cửa uốn cong mềm mại chạy dọc dãy hành lang tạo nên các nhịp điệu kiến trúc lặp lại, mang lại cảm giác sâu hun hút, hoài cổ và thanh thoát.</li>
+                    <li><strong>Chi tiết trang trí tối giản:</strong> Các đường phào chỉ quanh khung cửa, gờ tường và đòn mái được tiết chế nhẹ nhàng, tỉ mỉ, tôn lên nét trang nhã đúng chất một không gian giáo dục.</li>
+                </ul>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-gray-900 text-lg flex items-center">
+                    <i class="fa-solid fa-wind text-[#9B2C2C] mr-2"></i> 4. Giải pháp "Nhiệt đới hóa" đặc trưng Sài Gòn
+                </h4>
+                <p class="text-gray-700 leading-relaxed">
+                    Để thích nghi hoàn hảo với thời tiết nắng mưa phương Nam, các KTS Pháp đã lồng ghép khéo léo những giải pháp bản địa:
+                </p>
+                <ul class="list-disc pl-5 text-gray-700 space-y-2 leading-relaxed">
+                    <li><strong>Cửa sổ hai lớp "Lá sách gỗ - Kính":</strong> Hệ thống cửa sổ lá sách màu trắng/xanh đặc trưng vừa giúp che bớt ánh nắng chói chang, vừa cho phép gió tự nhiên lùa qua ngay cả khi đóng cửa tránh mưa.</li>
+                    <li><strong>Mái ngói dốc và ban công vươn xa:</strong> Hệ mái ngói màu đỏ tươi có độ dốc lớn giúp thoát nước mưa nhanh. Mái đua nhô ra xa (từ 1.2m – 1.5m) được đỡ bằng các con-sơn (bracket) gỗ chạm khắc, che chắn ánh nắng gắt và mưa hắt trực tiếp vào mảng tường phòng học.</li>
+                    <li><strong>Màu sắc kinh điển:</strong> Tone màu sơn vàng nhạt kết hợp với khung cửa trắng/xanh và mái ngói đỏ – gam màu kinh điển của các công trình Pháp cổ – tạo cảm giác ấm áp và hoài niệm qua hơn một thế kỷ.</li>
+                </ul>
+            </div>
+
+            <!-- Map -->
+            <div class="pt-4 border-t">
+                <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-map-location-dot text-[#9B2C2C] mr-2"></i> Vị Trí Bản Đồ:</h4>
+                <div id="map" class="map-box rounded-lg border"></div>
+                <a href="https://www.google.com/maps/search/?api=1&query=10.7816,106.6912" target="_blank" class="block text-center py-2.5 bg-red-800 text-white font-bold rounded-lg hover:bg-red-900 transition text-sm mt-3">Mở Chỉ Đường Trên Google Maps</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#1A202C] text-gray-400 py-6 text-center text-xs">
+        <p>© 2026 Trang Thông Tin Di Tích Lịch Sử TP.HCM</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([10.7816, 106.6912], 16);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.marker([10.7816, 106.6912]).addTo(map).bindPopup('<b>Trường THPT Lê Quý Đôn</b>').openPopup();
+
+        let synth = window.speechSynthesis;
+        let utterance = null;
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            synth.cancel();
+            utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'vi-VN';
+            utterance.rate = 0.9;
+            synth.speak(utterance);
+        }
+        function stopSpeech() {
+            if (synth && (synth.speaking || synth.pending)) synth.cancel();
+        }
+    </script>
+</body>
+</html>
